@@ -51,6 +51,7 @@ header img {
   text-align: center;
 }
 
+.btn,
 .call-to-action {
   width: calc(100% - 400px);
   padding: 16px 100px;
@@ -66,6 +67,7 @@ header img {
   cursor: pointer;
 }
 
+.btn:hover,
 .call-to-action:hover {
   transform: scale(0.99);
   color: rgba(255, 255, 255, 0.8)
@@ -117,7 +119,7 @@ header img {
 }
 
 .product-info {
-  padding: 40px 10px;
+  padding: 0px 10px 40px 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -149,7 +151,7 @@ header img {
 .cards-block {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  padding: 0 1.5rem;
+  padding: 2rem 1.5rem;
   gap: 12px;
 }
 
@@ -198,6 +200,7 @@ header img {
   background-color: var(--gray);
   font-size: 1.2rem;
   color: var(--primary-color);
+  border-radius: 5px;
 }
 
 .no-spinner::-webkit-outer-spin-button,
@@ -208,4 +211,8 @@ header img {
 
 .no-spinner {
   -moz-appearance: textfield;
+}
+
+.btn-buy {
+  width: 100%;
 }

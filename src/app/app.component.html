@@ -10,7 +10,7 @@
         ¡CUMPLE TU SUEÑO, ENTRE MÁS NÚMEROS ADQUIERAS MÁS POSIBILIDADES TIENES
         DE GANAR!
       </p>
-      <button class="call-to-action">Participa aquí</button>
+      <button class="btn call-to-action">Participa aquí</button>
       <img class="img-product" src="{{ imgProduct }}" />
     </div>
   </section>
@@ -45,11 +45,19 @@
           Escoge la cantidad de números que deseas
         </p>
         <input
+          (blur)="blur($event)"
+          [value]="totalNumbers"
+          #asTotal
+          (change)="updateChange($event)"
+          (input)="update($event)"
+          (ngModel)="(totalNumbers)"
           class="card-input no-spinner"
           inputmode="numeric"
           type="number"
         />
+        <label>{{ totalNumbers }}</label>
       </article>
     </div>
+    <button class="btn btn-buy">Comprar</button>
   </section>
 </div>
