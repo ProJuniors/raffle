@@ -2,8 +2,8 @@
   <img src="{{ logo }}" />
 </header>
 
-<section class="container">
-  <div class="wrapper">
+<div class="wrapper">
+  <section class="container">
     <div class="container-info">
       <h2 class="title">XTZ 150</h2>
       <p class="slogan">
@@ -13,26 +13,43 @@
       <button class="call-to-action">Participa aquí</button>
       <img class="img-product" src="{{ imgProduct }}" />
     </div>
-    <!-- <div *ngFor="let product of products">{{ product.name }}</div> -->
-  </div>
-</section>
+  </section>
 
-<section class="goal">
-  <h3 class="goal-title">Objetivo a alcanzar</h3>
-  <div #progressBar class="progress">
-    <div class="bar"></div>
-    <span class="goal-achieved">28.22% del objetivo alcanzado</span>
-  </div>
-</section>
+  <section class="goal">
+    <h3 class="goal-title">Objetivo a alcanzar</h3>
+    <div #progressBar class="progress">
+      <div #asBar id="bar" class="bar"></div>
+      <span class="goal-achieved">28.22% del objetivo alcanzado</span>
+    </div>
+  </section>
 
-<section class="product-container">
-  <div class="product-info">
-    <h3>Valor de cada número</h3>
-    <span>$5.000</span>
-    <p>
-      Este sort3o se realizará por la lot3r14 de M3d3ll1n una vez se alcance el
-      100% de la meta
-    </p>
-    <p>Adquiere tus números</p>
-  </div>
-</section>
+  <section class="product-container">
+    <div class="product-info">
+      <h3 class="title">Valor de cada número</h3>
+      <span class="product-price">$5.000</span>
+      <p class="product-information">
+        Este sort3o se realizará por la lot3r14 de M3d3ll1n una vez se alcance
+        el 100% de la meta
+      </p>
+      <p class="">Adquiere tus números</p>
+    </div>
+    <div class="cards-block">
+      <article *ngFor="let card of cards" class="card">
+        <input id="selector" name="selector" class="radio" type="radio" />
+        <h3 class="card-title">2 Números</h3>
+        <span class="card-price">$10.000</span>
+      </article>
+      <article class="card">
+        <input id="selector" name="selector" class="radio" type="radio" />
+        <p class="card-choose-title">
+          Escoge la cantidad de números que deseas
+        </p>
+        <input
+          class="card-input no-spinner"
+          inputmode="numeric"
+          type="number"
+        />
+      </article>
+    </div>
+  </section>
+</div>
