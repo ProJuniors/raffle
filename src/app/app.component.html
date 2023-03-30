@@ -1,6 +1,4 @@
-<header>
-  <img src="{{ logo }}" />
-</header>
+<app-header></app-header>
 
 <div class="wrapper">
   <section class="container">
@@ -31,20 +29,35 @@
         Este sort3o se realizará por la lot3r14 de M3d3ll1n una vez se alcance
         el 100% de la meta
       </p>
-      <p class="">Adquiere tus números</p>
+      <p class="acquire-numbers">Adquiere tus números</p>
     </div>
+
     <div class="cards-block">
-      <article *ngFor="let card of cards" class="card">
-        <input id="selector" name="selector" class="radio" type="radio" />
-        <h3 class="card-title">2 Números</h3>
-        <span class="card-price">$10.000</span>
+      <article
+        #asArticle
+        *ngFor="let card of cards"
+        class="card"
+        (click)="selectCard($event)"
+      >
+        <input
+          [attr.checked]="
+            selectedOption.quantity === card.quantity ? true : null
+          "
+          id="selector"
+          name="selector"
+          class="radio"
+          type="radio"
+        />
+        <h3 class="card-title event-none">{{ card.quantity }} Números</h3>
+        <span class="card-price event-none">${{ card.price }}</span>
       </article>
-      <article class="card">
+      <article class="card" (click)="selectCard($event)">
         <input id="selector" name="selector" class="radio" type="radio" />
-        <p class="card-choose-title">
+        <p class="card-choose-title event-none">
           Escoge la cantidad de números que deseas
         </p>
         <input
+          (click)="selectCardQuantity($event)"
           (blur)="blur($event)"
           [value]="totalNumbers"
           #asTotal
@@ -60,3 +73,4 @@
     <button class="btn btn-buy">Comprar</button>
   </section>
 </div>
+<app-footer></app-footer>
