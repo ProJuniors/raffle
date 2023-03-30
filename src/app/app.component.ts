@@ -30,8 +30,9 @@ export class AppComponent implements AfterViewInit{
   imgProduct = "https://yamaha-mundoyamaha.com/wp-content/uploads/2022/06/XTZ150_motos_header.png"
   @ViewChild('asBar') bar!: ElementRef;
   @ViewChild('asTotal') total!: ElementRef;
+  @ViewChild('productSection') productSection!: ElementRef;
 
-  constructor(private renderer2: Renderer2, private elRef: ElementRef) {
+  constructor(private renderer: Renderer2, private elRef: ElementRef) {
 
   }
 
@@ -61,7 +62,7 @@ export class AppComponent implements AfterViewInit{
 
   change() {
     const asBar = this.bar.nativeElement
-    this.renderer2.setStyle(asBar, "width", "10%")
+    this.renderer.setStyle(asBar, "width", "10%")
   }
 
   formatToMoney(num: any) {
@@ -70,9 +71,6 @@ export class AppComponent implements AfterViewInit{
     return formatNumber
   }
 
-  // selectCard(event: Event) {
-  //   console.log(this.article)
-  // }
   selectCard(evento: any) {
     const targetInput = this.elRef.nativeElement.contains(evento.target) ? evento.target.children[0] : null
 
@@ -84,6 +82,13 @@ export class AppComponent implements AfterViewInit{
     const targetInput = this.elRef.nativeElement.contains(evento.target) ? evento.target.parentNode.children[0]: null
     if(targetInput) {
       targetInput.checked = true
+    }
+  }
+
+  scrollToSection() {
+    const section = this.productSection.nativeElement;
+    if(section) {
+      this.renderer.selectRootElement(section).scrollIntoView({ behavior: "smooth"});
     }
   }
 }

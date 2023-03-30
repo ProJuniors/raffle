@@ -8,7 +8,9 @@
         ¡CUMPLE TU SUEÑO, ENTRE MÁS NÚMEROS ADQUIERAS MÁS POSIBILIDADES TIENES
         DE GANAR!
       </p>
-      <button class="btn call-to-action">Participa aquí</button>
+      <button (click)="scrollToSection()" class="btn call-to-action">
+        Participa aquí
+      </button>
       <img class="img-product" src="{{ imgProduct }}" />
     </div>
   </section>
@@ -22,6 +24,7 @@
   </section>
 
   <section class="product-container">
+    <div id="productSection" #productSection></div>
     <div class="product-info">
       <h3 class="title">Valor de cada número</h3>
       <span class="product-price">$5.000</span>
