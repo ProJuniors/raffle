@@ -57,6 +57,40 @@
   font-weight: 700;
   font-style: normal;
   color: var(--primary-color);
+  padding: 1rem 0;
+}
+
+.column {
+  width: 100%;
+  padding: 1rem;
+  color: var(--primary-color);
+  font-size: 20px;
+}
+
+.column:last-child {
+  border-left: 1px solid var(--primary-color);
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-top: 1px solid var(--primary-color);
+  border-left: 1px solid var(--primary-color);
+  border-right: 1px solid var(--primary-color);
+}
+
+.price {
+  font-weight: 700;
+}
+
+.total {
+  font-weight: 700;
+}
+
+.row:last-child {
+  border-bottom: 1px solid var(--primary-color);
+
 }
 
 @media screen and (max-width: 600px) {
