@@ -1,0 +1,76 @@
+<div class="wrapper">
+  <section class="container">
+    <div class="container-info">
+      <h2 class="title">XTZ 150</h2>
+      <p class="slogan">
+        ¡CUMPLE TU SUEÑO, ENTRE MÁS NÚMEROS ADQUIERAS MÁS POSIBILIDADES TIENES
+        DE GANAR!
+      </p>
+      <button (click)="scrollToSection()" class="btn call-to-action">
+        Participa aquí
+      </button>
+      <img class="img-product" src="{{ imgProduct }}" />
+    </div>
+  </section>
+
+  <section class="goal">
+    <h3 class="goal-title">Objetivo a alcanzar</h3>
+    <div #progressBar class="progress">
+      <div #asBar id="bar" class="bar"></div>
+      <span class="goal-achieved">28.22% del objetivo alcanzado</span>
+    </div>
+  </section>
+
+  <section class="product-container">
+    <div id="productSection" #productSection></div>
+    <div class="product-info">
+      <h3 class="title">Valor de cada número</h3>
+      <span class="product-price">$5.000</span>
+      <p class="product-information">
+        Este sort3o se realizará por la lot3r14 de M3d3ll1n una vez se alcance
+        el 100% de la meta
+      </p>
+      <p class="acquire-numbers">Adquiere tus números</p>
+    </div>
+
+    <div class="cards-block">
+      <article
+        #asArticle
+        *ngFor="let card of cards"
+        class="card"
+        (click)="selectCard($event)"
+      >
+        <input
+          [attr.checked]="
+            selectedOption.quantity === card.quantity ? true : null
+          "
+          id="selector"
+          name="selector"
+          class="radio"
+          type="radio"
+        />
+        <h3 class="card-title event-none">{{ card.quantity }} Números</h3>
+        <span class="card-price event-none">${{ card.price }}</span>
+      </article>
+      <article class="card" (click)="selectCard($event)">
+        <input id="selector" name="selector" class="radio" type="radio" />
+        <p class="card-choose-title event-none">
+          Escoge la cantidad de números que deseas
+        </p>
+        <input
+          (click)="selectCardQuantity($event)"
+          (blur)="blur($event)"
+          [value]="totalNumbers"
+          #asTotal
+          (change)="updateChange($event)"
+          (input)="update($event)"
+          (ngModel)="(totalNumbers)"
+          class="card-input no-spinner"
+          inputmode="numeric"
+          type="number"
+        />
+      </article>
+    </div>
+    <button (click)="saveAndRedirect()" class="btn btn-buy">Comprar</button>
+  </section>
+</div>

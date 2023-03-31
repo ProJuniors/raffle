@@ -1,12 +1,17 @@
 footer {
   height: var(--header-height);
-  width: 100%;
+  /* width: var(--header-height); */
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: 4px 0px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
-footer img {
+footer a {
+  width: fit-content;
+  height: var(--header-height);
+}
+
+footer a img {
   height: 100%;
 }
