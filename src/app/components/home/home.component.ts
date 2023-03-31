@@ -88,6 +88,7 @@ export class HomeComponent implements AfterViewInit{
 
   saveAndRedirect() {
     this.router.navigate(["/finalizar-compra"]);
+    window.scrollTo(0, 0);
   }
 
   scrollToSection() {
