@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PaymentformComponent } from './components/paymentform/paymentform.component';
-import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
+import { PaymentGuard } from './guards/payment.guard';
 
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "/home",
+    redirectTo: "home",
     pathMatch: "full"
   },
   {
@@ -17,6 +17,7 @@ const routes: Routes = [
   {
     path: "finalizar-compra",
     component: PaymentformComponent,
+    canActivate: [PaymentGuard]
   }
 ];
 

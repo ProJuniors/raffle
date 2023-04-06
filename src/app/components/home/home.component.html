@@ -36,15 +36,12 @@
     <div class="cards-block">
       <article
         #asArticle
-        *ngFor="let card of cards"
+        *ngFor="let card of cards; let i = index"
         class="card"
-        (click)="selectCard($event)"
+        (click)="selectCard($event, card.quantity, i)"
       >
         <input
-          [attr.checked]="
-            selectedOption.quantity === card.quantity ? true : null
-          "
-          id="selector"
+          [attr.checked]="selectedCard === i ? true : null"
           name="selector"
           class="radio"
           type="radio"
@@ -52,19 +49,28 @@
         <h3 class="card-title event-none">{{ card.quantity }} Números</h3>
         <span class="card-price event-none">${{ card.price }}</span>
       </article>
-      <article class="card" (click)="selectCard($event)">
-        <input id="selector" name="selector" class="radio" type="radio" />
+      <article
+        id="card-input"
+        card-id="card"
+        class="card"
+        (click)="selectCard($event, 2, cards.length)"
+      >
+        <input
+          [attr.checked]="selectedCard === cards.length ? true : null"
+          id="selector"
+          name="selector"
+          class="radio"
+          type="radio"
+        />
         <p class="card-choose-title event-none">
           Escoge la cantidad de números que deseas
         </p>
         <input
           (click)="selectCardQuantity($event)"
-          (blur)="blur($event)"
-          [value]="totalNumbers"
           #asTotal
           (change)="updateChange($event)"
           (input)="update($event)"
-          (ngModel)="(totalNumbers)"
+          [(ngModel)]="inputQuantity"
           class="card-input no-spinner"
           inputmode="numeric"
           type="number"

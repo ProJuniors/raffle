@@ -80,6 +80,10 @@
   border-right: 1px solid var(--primary-color);
 }
 
+.row p {
+  text-align: right;
+}
+
 .price {
   font-weight: 700;
 }
@@ -91,6 +95,15 @@
 .row:last-child {
   border-bottom: 1px solid var(--primary-color);
 
+}
+
+.show {
+  display: flex;
+  color: red;
+}
+
+.hidden {
+  display: none;
 }
 
 @media screen and (max-width: 600px) {
