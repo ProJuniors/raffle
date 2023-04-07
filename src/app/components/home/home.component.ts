@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Card, Product } from 'src/app/interfaces/user-data';
 import { GetDataService } from 'src/app/services/get-data.service';
 import { StorageServiceService } from 'src/app/services/storage-service.service';
 
@@ -9,12 +10,19 @@ import { StorageServiceService } from 'src/app/services/storage-service.service'
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements AfterViewInit, OnInit{
-  title = 'raffle';
-  cards = this.dataService.getData()
+  title = 'raffle'
+  product: Product = {
+    name: "",
+    description: "",
+    unitPrice: 0,
+    cards: []
+  };
+  cards: Card[] = []
   selectedCard = 0
   minNumbers = 2
   totalNumbers = this.minNumbers
   inputQuantity = this.minNumbers
+  global: any = ""
 
   imgProduct = "https://yamaha-mundoyamaha.com/wp-content/uploads/2022/06/XTZ150_motos_header.png"
   @ViewChild('asBar') bar!: ElementRef;
@@ -30,6 +38,12 @@ export class HomeComponent implements AfterViewInit, OnInit{
     ) {}
 
   ngOnInit(): void {
+    this.dataService.getData().subscribe((data) => {
+      if(data.hasOwnProperty("cards")) {
+        this.product =( <Product>data)
+        this.cards = this.product.cards
+      }
+    })
     this.storageService.loadStorage()
     if(this.storageService.totalNumber !== 0) {
       this.selectedCard = this.storageService.selectedIndex
@@ -42,6 +56,7 @@ export class HomeComponent implements AfterViewInit, OnInit{
   }
 
   ngAfterViewInit(): void {
+    // this.cards = this.dataService.getData()
     this.total.nativeElement.value = this.totalNumbers
   }
   update(evento: any) {
@@ -62,9 +77,6 @@ export class HomeComponent implements AfterViewInit, OnInit{
   //   const asBar = this.bar.nativeElement
   //   this.renderer.setStyle(asBar, "width", "10%")
   // }
-
-
-
 
   //Esto es solo es para seleccionar tarjetas
   selectCard(evento: any, quantity: number, i: number) {

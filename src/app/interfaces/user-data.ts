@@ -5,3 +5,16 @@ export interface UserData {
   phoneNumber: string,
   email: string
 }
+
+export interface Card {
+  index: number,
+  quantity: number,
+  price: string
+}
+
+export interface Product {
+  name: string,
+  description: string,
+  unitPrice: number,
+  cards: Card[]
+}

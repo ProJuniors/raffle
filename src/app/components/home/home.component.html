@@ -1,10 +1,9 @@
 <div class="wrapper">
   <section class="container">
     <div class="container-info">
-      <h2 class="title">XTZ 150</h2>
+      <h2 class="title">{{ product.name }}</h2>
       <p class="slogan">
-        ¡CUMPLE TU SUEÑO, ENTRE MÁS NÚMEROS ADQUIERAS MÁS POSIBILIDADES TIENES
-        DE GANAR!
+        {{ product.description }}
       </p>
       <button (click)="scrollToSection()" class="btn call-to-action">
         Participa aquí
@@ -25,7 +24,7 @@
     <div id="productSection" #productSection></div>
     <div class="product-info">
       <h3 class="title">Valor de cada número</h3>
-      <span class="product-price">$5.000</span>
+      <span class="product-price">${{ product.unitPrice }}</span>
       <p class="product-information">
         Este sort3o se realizará por la lot3r14 de M3d3ll1n una vez se alcance
         el 100% de la meta
@@ -36,7 +35,7 @@
     <div class="cards-block">
       <article
         #asArticle
-        *ngFor="let card of cards; let i = index"
+        *ngFor="let card of product.cards; let i = index"
         class="card"
         (click)="selectCard($event, card.quantity, i)"
       >

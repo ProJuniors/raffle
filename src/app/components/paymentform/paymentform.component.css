@@ -106,6 +106,25 @@
   display: none;
 }
 
+.pay-button-container {
+  text-align: right;
+}
+
+.pay-button {
+  background-color: var(--secondary-color);
+  font-size: 20px;
+  font-weight: 500;
+  font-style: normal;
+  padding: 1rem 2rem;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* .pay-button:hover {
+
+} */
+
 @media screen and (max-width: 600px) {
   .billing-data {
     flex-direction: column;

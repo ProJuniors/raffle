@@ -1,36 +1,38 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GetDataService {
-  unitPrice = 5000
-  cards = [
-    {
-      index: 0, quantity: 2, price: this.formatToMoney(this.unitPrice * 2)
-    },
-    {
-      index: 1, quantity: 5, price: this.formatToMoney(this.unitPrice * 5)
-    },
-    {
-      index: 2, quantity: 10, price: this.formatToMoney(this.unitPrice * 10)
-    },
-    {
-      index: 3, quantity: 50, price: this.formatToMoney(this.unitPrice * 50)
-    },
-    {
-      index: 4, quantity: 100, price: this.formatToMoney(this.unitPrice * 100)
-    }
-  ]
 
-  constructor() { }
+  URL_GET_DATA: string = "http://localhost:3000/raffle-api/raffle-active"
+  producName = ""
+  unitPrice = 0
+  cards = []
+
+  constructor(private http: HttpClient) { }
 
   formatToMoney(num: any) {
     const formatNumber = new Intl.NumberFormat("es-ES", {maximumSignificantDigits: 3}).format(num)
     return formatNumber
   }
 
+  doPost = (url: string, data: any) => {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+    })
+    return this.http.post(url, data, {headers})
+  }
+
+  doGet = (url: string) => {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+    })
+    return this.http.get(url, {headers})
+  }
+
   getData = () => {
-    return this.cards
+    return this.doGet(this.URL_GET_DATA)
   }
 }

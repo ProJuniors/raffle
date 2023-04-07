@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Product } from 'src/app/interfaces/user-data';
+import { GetDataService } from 'src/app/services/get-data.service';
+import { StorageServiceService } from 'src/app/services/storage-service.service';
 
 @Component({
   selector: 'app-paymentform',
@@ -7,7 +10,21 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./paymentform.component.css']
 })
 
-export class PaymentformComponent {
+export class PaymentformComponent implements OnInit {
+
+  URL = "http://localhost:3000/raffle-api/get-link"
+  paymentLink: any = ""
+
+  item = {
+    title: 'Mi producto',
+    unit_price: 5000,
+    quantity: 1
+  }
+  preference = {
+    items: [
+      this.item
+    ]
+  }
 
   hiddens = {
     name: "hidden",
@@ -38,6 +55,8 @@ export class PaymentformComponent {
     email: "Email requerido."
   }
 
+  constructor (private getDataService: GetDataService, private storageService: StorageServiceService) {}
+
   form: FormGroup = new FormGroup({
     name: new FormControl("", [Validators.required, Validators.pattern(this.regexOnlyLetters)]),
     lastName: new FormControl("", [Validators.required, Validators.pattern(this.regexOnlyLetters)]),
@@ -46,16 +65,33 @@ export class PaymentformComponent {
     email: new FormControl("", [Validators.required, Validators.pattern(this.regexEmail)]),
   })
 
+  ngOnInit(): void {
+    this.getDataService.getData().subscribe((data) => {
+      this.item.unit_price = (<Product>data).unitPrice
+      this.item.title = (<Product>data).name
+    })
+    this.storageService.loadStorage()
+    this.item.quantity = this.storageService.totalNumber
+    this.getDataService.doPost(this.URL, {preference: this.preference})
+    .subscribe((data) => {
+      this.paymentLink = data
+    })
+  }
+
   sendData = () => {
     const keys: string[] = Object.keys(this.requiredMsg)
 
-    keys.forEach(key => {
-      const hiddenObj = this.hiddens
-      const input = this.form.get(key)
-      if(!input?.touched && input?.value === "") {
-        this.hiddens[key as keyof typeof hiddenObj] = ""
-      }
-    })
+    if(this.form.invalid) {
+      keys.forEach(key => {
+        const hiddenObj = this.hiddens
+        const input = this.form.get(key)
+        if(!input?.touched && input?.value === "") {
+          this.hiddens[key as keyof typeof hiddenObj] = ""
+        }
+      })
+    } else {
+      window.location = this.paymentLink
+    }
   }
 
   messageError(input: string) {
