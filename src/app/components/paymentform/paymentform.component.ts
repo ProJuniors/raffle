@@ -12,7 +12,7 @@ import { StorageServiceService } from 'src/app/services/storage-service.service'
 
 export class PaymentformComponent implements OnInit {
 
-  URL = "http://localhost:3000/raffle-api/get-link"
+  URL = "https://raffle-serve-production.up.railway.app/raffle-api/get-link"
   paymentLink: any = ""
 
   item = {

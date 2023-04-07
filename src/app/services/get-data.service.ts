@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class GetDataService {
 
-  URL_GET_DATA: string = "http://localhost:3000/raffle-api/raffle-active"
+  URL_GET_DATA: string = "https://raffle-serve-production.up.railway.app/raffle-api/raffle-active"
   producName = ""
   unitPrice = 0
   cards = []
